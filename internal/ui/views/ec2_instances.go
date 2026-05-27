@@ -15,14 +15,15 @@ import (
 )
 
 type EC2InstancesModel struct {
-	instances   []aws.EC2Instance
-	cursor      int
-	filter      string
-	filtering   bool
-	filterInput textinput.Model
-	width       int
-	height      int
-	loaded      bool
+	instances    []aws.EC2Instance
+	cursor       int
+	filter       string
+	filtering    bool
+	filterInput  textinput.Model
+	width        int
+	height       int
+	loaded       bool
+	showAbsolute bool
 }
 
 func NewEC2Instances() EC2InstancesModel {
@@ -71,6 +72,11 @@ func (m EC2InstancesModel) Update(msg tea.Msg) (EC2InstancesModel, tea.Cmd) {
 			m.filterInput.Width = 40
 			return m, m.filterInput.Focus()
 		}
+
+		if key.Matches(msg, theme.Keys.ToggleTime) {
+			m.showAbsolute = !m.showAbsolute
+			return m, nil
+		}
 	}
 	return m, nil
 }
@@ -116,7 +122,11 @@ func (m EC2InstancesModel) View() string {
 		}
 		age := ""
 		if !inst.LaunchTime.IsZero() {
-			age = shortDuration(time.Since(inst.LaunchTime))
+			if m.showAbsolute {
+				age = inst.LaunchTime.Format("2006-01-02 15:04:05")
+			} else {
+				age = formatAge(inst.LaunchTime) + " ago"
+			}
 		}
 		tbl.AddRow(
 			components.Plain(name),

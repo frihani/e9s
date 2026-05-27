@@ -3,14 +3,15 @@ package theme
 import "github.com/charmbracelet/bubbles/key"
 
 type KeyMap struct {
-	Up      key.Binding
-	Down    key.Binding
-	Enter   key.Binding
-	Back    key.Binding
-	Quit    key.Binding
-	Refresh key.Binding
-	Help    key.Binding
-	Filter  key.Binding
+	Up         key.Binding
+	Down       key.Binding
+	Enter      key.Binding
+	Back       key.Binding
+	Quit       key.Binding
+	Refresh    key.Binding
+	Help       key.Binding
+	Filter     key.Binding
+	ToggleTime key.Binding
 }
 
 var Keys = KeyMap{
@@ -45,5 +46,9 @@ var Keys = KeyMap{
 	Filter: key.NewBinding(
 		key.WithKeys("/"),
 		key.WithHelp("/", "filter"),
+	),
+	ToggleTime: key.NewBinding(
+		key.WithKeys("T"),
+		key.WithHelp("T", "toggle time display"),
 	),
 }

@@ -23,6 +23,7 @@ type SSMModel struct {
 	width       int
 	height      int
 	loaded      bool
+	showAbsolute bool
 }
 
 func NewSSM(pathPrefix string) SSMModel {
@@ -71,6 +72,11 @@ func (m SSMModel) Update(msg tea.Msg) (SSMModel, tea.Cmd) {
 			m.filterInput.Focus()
 			m.filterInput.Width = 30
 			return m, m.filterInput.Focus()
+		}
+
+		if key.Matches(msg, theme.Keys.ToggleTime) {
+			m.showAbsolute = !m.showAbsolute
+			return m, nil
 		}
 	}
 	return m, nil
@@ -123,7 +129,11 @@ func (m SSMModel) View() string {
 
 		modified := ""
 		if !p.LastModified.IsZero() {
-			modified = formatAge(p.LastModified) + " ago"
+			if m.showAbsolute {
+				modified = p.LastModified.Format("2006-01-02 15:04:05")
+			} else {
+				modified = formatAge(p.LastModified) + " ago"
+			}
 		}
 
 		tbl.AddRow(

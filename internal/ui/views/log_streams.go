@@ -15,16 +15,17 @@ import (
 )
 
 type LogStreamsModel struct {
-	logGroup    string
-	streams     []aws.LogStreamInfo
-	selected    map[string]bool // multi-select by stream name
-	cursor      int
-	filter      string
-	filtering   bool
-	filterInput textinput.Model
-	width       int
-	height      int
-	loaded      bool
+	logGroup     string
+	streams      []aws.LogStreamInfo
+	selected     map[string]bool // multi-select by stream name
+	cursor       int
+	filter       string
+	filtering    bool
+	filterInput  textinput.Model
+	width        int
+	height       int
+	loaded       bool
+	showAbsolute bool
 }
 
 func NewLogStreams(logGroup string) LogStreamsModel {
@@ -84,6 +85,11 @@ func (m LogStreamsModel) Update(msg tea.Msg) (LogStreamsModel, tea.Cmd) {
 			m.filterInput.Width = 40
 			return m, m.filterInput.Focus()
 		}
+
+		if key.Matches(msg, theme.Keys.ToggleTime) {
+			m.showAbsolute = !m.showAbsolute
+			return m, nil
+		}
 	}
 	return m, nil
 }
@@ -129,7 +135,11 @@ func (m LogStreamsModel) View() string {
 		lastEvent := "-"
 		if s.LastEventTime > 0 {
 			t := time.UnixMilli(s.LastEventTime)
-			lastEvent = formatAge(t) + " ago"
+			if m.showAbsolute {
+				lastEvent = t.Format("2006-01-02 15:04:05")
+			} else {
+				lastEvent = formatAge(t) + " ago"
+			}
 		}
 		check := " "
 		if m.selected[s.Name] {

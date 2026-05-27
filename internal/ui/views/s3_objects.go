@@ -25,6 +25,7 @@ type S3ObjectsModel struct {
 	width       int
 	height      int
 	loaded      bool
+	showAbsolute bool
 }
 
 func NewS3Objects(bucket, prefix string) S3ObjectsModel {
@@ -74,6 +75,11 @@ func (m S3ObjectsModel) Update(msg tea.Msg) (S3ObjectsModel, tea.Cmd) {
 			m.filterInput.Width = 40
 			return m, m.filterInput.Focus()
 		}
+
+		if key.Matches(msg, theme.Keys.ToggleTime) {
+			m.showAbsolute = !m.showAbsolute
+			return m, nil
+		}
 	}
 	return m, nil
 }
@@ -122,7 +128,11 @@ func (m S3ObjectsModel) View() string {
 		} else {
 			modified := ""
 			if !obj.LastModified.IsZero() {
-				modified = formatAge(obj.LastModified) + " ago"
+				if m.showAbsolute {
+					modified = obj.LastModified.Format("2006-01-02 15:04:05")
+				} else {
+					modified = formatAge(obj.LastModified) + " ago"
+				}
 			}
 			tbl.AddRow(
 				components.Plain(name),

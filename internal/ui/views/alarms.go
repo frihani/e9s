@@ -21,7 +21,7 @@ type AlarmsModel struct {
 	filter      string
 	filtering   bool
 	filterInput textinput.Model
-	utcTime     bool
+	showAbsolute bool
 	width       int
 	height      int
 	loaded      bool
@@ -64,8 +64,8 @@ func (m AlarmsModel) Update(msg tea.Msg) (AlarmsModel, tea.Cmd) {
 		case msg.String() == "pgdown":
 			filtered := m.filteredAlarms()
 			m.cursor = min(m.cursor+m.visibleRows(), max(0, len(filtered)-1))
-		case msg.String() == "t":
-			m.utcTime = !m.utcTime
+		case key.Matches(msg, theme.Keys.ToggleTime):
+			m.showAbsolute = !m.showAbsolute
 		case key.Matches(msg, theme.Keys.Filter):
 			m.filtering = true
 			m.filterInput = textinput.New()
@@ -116,10 +116,12 @@ func (m AlarmsModel) View() string {
 	for _, a := range filtered {
 		stateCell := stateStyledCell(a.State)
 		var ts string
-		if m.utcTime {
-			ts = a.StateUpdatedAt.UTC().Format("2006-01-02 15:04:05 UTC")
-		} else {
+		if a.StateUpdatedAt.IsZero() {
+			ts = ""
+		} else if m.showAbsolute {
 			ts = a.StateUpdatedAt.Local().Format("2006-01-02 15:04:05")
+		} else {
+			ts = formatAge(a.StateUpdatedAt) + " ago"
 		}
 		tbl.AddRow(
 			stateCell,

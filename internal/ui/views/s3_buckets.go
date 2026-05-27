@@ -21,7 +21,8 @@ type S3BucketsModel struct {
 	filterInput textinput.Model
 	width       int
 	height      int
-	loaded      bool
+	loaded       bool
+	showAbsolute bool
 }
 
 func NewS3Buckets(searchTerm string) S3BucketsModel {
@@ -71,6 +72,11 @@ func (m S3BucketsModel) Update(msg tea.Msg) (S3BucketsModel, tea.Cmd) {
 			m.filterInput.Width = 30
 			return m, m.filterInput.Focus()
 		}
+
+		if key.Matches(msg, theme.Keys.ToggleTime) {
+			m.showAbsolute = !m.showAbsolute
+			return m, nil
+		}
 	}
 	return m, nil
 }
@@ -111,7 +117,11 @@ func (m S3BucketsModel) View() string {
 	for _, bkt := range filtered {
 		created := ""
 		if !bkt.CreatedAt.IsZero() {
-			created = bkt.CreatedAt.Format("2006-01-02")
+			if m.showAbsolute {
+				created = bkt.CreatedAt.Format("2006-01-02 15:04:05")
+			} else {
+				created = formatAge(bkt.CreatedAt) + " ago"
+			}
 		}
 		tbl.AddRow(
 			components.Plain(bkt.Name),

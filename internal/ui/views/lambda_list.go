@@ -23,6 +23,7 @@ type LambdaListModel struct {
 	width       int
 	height      int
 	loaded      bool
+	showAbsolute bool
 }
 
 func NewLambdaList(searchTerm string) LambdaListModel {
@@ -71,6 +72,11 @@ func (m LambdaListModel) Update(msg tea.Msg) (LambdaListModel, tea.Cmd) {
 			m.filterInput.Focus()
 			m.filterInput.Width = 30
 			return m, m.filterInput.Focus()
+		}
+
+		if key.Matches(msg, theme.Keys.ToggleTime) {
+			m.showAbsolute = !m.showAbsolute
+			return m, nil
 		}
 	}
 	return m, nil
@@ -128,7 +134,11 @@ func (m LambdaListModel) View() string {
 
 		modified := ""
 		if !fn.LastModified.IsZero() {
-			modified = formatAge(fn.LastModified) + " ago"
+			if m.showAbsolute {
+				modified = fn.LastModified.Format("2006-01-02 15:04:05")
+			} else {
+				modified = formatAge(fn.LastModified) + " ago"
+			}
 		}
 
 		tbl.AddRow(

@@ -22,6 +22,7 @@ type SecretsModel struct {
 	width       int
 	height      int
 	loaded      bool
+	showAbsolute bool
 }
 
 func NewSecrets(nameFilter string) SecretsModel {
@@ -71,6 +72,11 @@ func (m SecretsModel) Update(msg tea.Msg) (SecretsModel, tea.Cmd) {
 			m.filterInput.Width = 30
 			return m, m.filterInput.Focus()
 		}
+
+		if key.Matches(msg, theme.Keys.ToggleTime) {
+			m.showAbsolute = !m.showAbsolute
+			return m, nil
+		}
 	}
 	return m, nil
 }
@@ -117,7 +123,11 @@ func (m SecretsModel) View() string {
 
 		changed := ""
 		if !s.LastChanged.IsZero() {
-			changed = formatAge(s.LastChanged) + " ago"
+			if m.showAbsolute {
+				changed = s.LastChanged.Format("2006-01-02 15:04:05")
+			} else {
+				changed = formatAge(s.LastChanged) + " ago"
+			}
 		}
 
 		tbl.AddRow(

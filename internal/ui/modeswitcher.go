@@ -16,9 +16,9 @@ type ModeSwitchSelectedMsg struct {
 }
 
 type ModeSwitcherModel struct {
-	Active bool
-	tabs   []ModeTab
-	cursor int
+	Active  bool
+	tabs    []ModeTab
+	cursor  int
 	current topMode
 }
 

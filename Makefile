@@ -2,7 +2,7 @@ BINARY := e9s
 VERSION := $(shell git describe --tags --always --dirty 2>/dev/null || echo "dev")
 LDFLAGS := -ldflags "-s -w -X main.version=$(VERSION)"
 
-.PHONY: build install clean
+.PHONY: build install clean fmt test
 
 build:
 	go build $(LDFLAGS) -o $(BINARY) .
@@ -12,6 +12,12 @@ install:
 
 clean:
 	rm -f $(BINARY)
+
+fmt:
+	gofmt -w .
+
+test:
+	go test ./...
 
 linux-amd64:
 	GOOS=linux GOARCH=amd64 go build $(LDFLAGS) -o $(BINARY)-linux-amd64 .

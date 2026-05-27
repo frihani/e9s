@@ -16,13 +16,13 @@ const pathInputMaxVisible = 8
 // PathInput provides a directory path input with filesystem completion.
 // Type to filter, Tab/Down/Up to navigate suggestions, Enter to select.
 type PathInput struct {
-	Action    InputAction
-	Prompt    string
-	value     string // current input value
-	cursor    int    // cursor in suggestions list (-1 = typing)
-	matches   []pathMatch
-	hasTF     bool
-	errMsg    string
+	Action  InputAction
+	Prompt  string
+	value   string // current input value
+	cursor  int    // cursor in suggestions list (-1 = typing)
+	matches []pathMatch
+	hasTF   bool
+	errMsg  string
 }
 
 type pathMatch struct {

@@ -28,7 +28,7 @@ type ECRImage struct {
 	PushedAt     time.Time
 	SizeBytes    int64
 	MediaType    string
-	ScanStatus   string // COMPLETE, IN_PROGRESS, FAILED, etc.
+	ScanStatus   string           // COMPLETE, IN_PROGRESS, FAILED, etc.
 	ScanSeverity map[string]int32 // severity → count
 }
 

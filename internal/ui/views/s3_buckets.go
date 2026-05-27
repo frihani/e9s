@@ -13,14 +13,14 @@ import (
 )
 
 type S3BucketsModel struct {
-	buckets     []aws.S3Bucket
-	searchTerm  string
-	cursor      int
-	filter      string
-	filtering   bool
-	filterInput textinput.Model
-	width       int
-	height      int
+	buckets      []aws.S3Bucket
+	searchTerm   string
+	cursor       int
+	filter       string
+	filtering    bool
+	filterInput  textinput.Model
+	width        int
+	height       int
 	loaded       bool
 	showAbsolute bool
 }
@@ -166,8 +166,8 @@ func (m S3BucketsModel) SelectedBucket() *aws.S3Bucket {
 	return &bkt
 }
 
-func (m S3BucketsModel) SearchTerm() string  { return m.searchTerm }
-func (m S3BucketsModel) IsFiltering() bool    { return m.filtering }
+func (m S3BucketsModel) SearchTerm() string { return m.searchTerm }
+func (m S3BucketsModel) IsFiltering() bool  { return m.filtering }
 
 func (m S3BucketsModel) visibleRows() int {
 	overhead := 9

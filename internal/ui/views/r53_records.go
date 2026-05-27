@@ -201,9 +201,9 @@ func (m R53RecordsModel) SelectedRecord() *aws.R53Record {
 	return &r
 }
 
-func (m R53RecordsModel) ZoneName() string    { return m.zoneName }
-func (m R53RecordsModel) ZoneID() string      { return m.zoneID }
-func (m R53RecordsModel) IsFiltering() bool   { return m.filtering }
+func (m R53RecordsModel) ZoneName() string  { return m.zoneName }
+func (m R53RecordsModel) ZoneID() string    { return m.zoneID }
+func (m R53RecordsModel) IsFiltering() bool { return m.filtering }
 
 func (m R53RecordsModel) visibleRows() int {
 	overhead := 9

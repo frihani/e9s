@@ -14,15 +14,15 @@ import (
 )
 
 type LambdaListModel struct {
-	functions   []aws.LambdaFunction
-	searchTerm  string
-	cursor      int
-	filter      string
-	filtering   bool
-	filterInput textinput.Model
-	width       int
-	height      int
-	loaded      bool
+	functions    []aws.LambdaFunction
+	searchTerm   string
+	cursor       int
+	filter       string
+	filtering    bool
+	filterInput  textinput.Model
+	width        int
+	height       int
+	loaded       bool
 	showAbsolute bool
 }
 
@@ -190,8 +190,8 @@ func (m LambdaListModel) SelectedFunction() *aws.LambdaFunction {
 	return &fn
 }
 
-func (m LambdaListModel) SearchTerm() string  { return m.searchTerm }
-func (m LambdaListModel) IsFiltering() bool    { return m.filtering }
+func (m LambdaListModel) SearchTerm() string { return m.searchTerm }
+func (m LambdaListModel) IsFiltering() bool  { return m.filtering }
 
 func (m LambdaListModel) visibleRows() int {
 	overhead := 9

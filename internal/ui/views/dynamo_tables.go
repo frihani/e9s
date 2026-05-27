@@ -146,8 +146,8 @@ func (m DynamoTablesModel) SelectedTable() string {
 	return filtered[m.cursor]
 }
 
-func (m DynamoTablesModel) SearchTerm() string  { return m.searchTerm }
-func (m DynamoTablesModel) IsFiltering() bool    { return m.filtering }
+func (m DynamoTablesModel) SearchTerm() string { return m.searchTerm }
+func (m DynamoTablesModel) IsFiltering() bool  { return m.filtering }
 
 func (m DynamoTablesModel) visibleRows() int {
 	overhead := 9

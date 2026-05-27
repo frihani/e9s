@@ -144,8 +144,8 @@ func (m SQSMessageDetailModel) View() string {
 }
 
 func (m SQSMessageDetailModel) Message() *aws.SQSMessage { return m.message }
-func (m SQSMessageDetailModel) QueueName() string         { return m.queueName }
-func (m SQSMessageDetailModel) QueueURL() string           { return m.queueURL }
+func (m SQSMessageDetailModel) QueueName() string        { return m.queueName }
+func (m SQSMessageDetailModel) QueueURL() string         { return m.queueURL }
 
 func (m SQSMessageDetailModel) visibleLines() int {
 	h := m.height - 6

@@ -247,4 +247,3 @@ func derefInt64(p *int64) int64 {
 	}
 	return 0
 }
-

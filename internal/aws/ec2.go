@@ -15,21 +15,21 @@ import (
 
 // EC2Instance represents an EC2 instance summary.
 type EC2Instance struct {
-	InstanceID    string
-	Name          string
-	State         string // running, stopped, pending, etc.
-	Type          string // t3.micro, etc.
-	AZ            string
-	PrivateIP     string
-	PublicIP      string
-	VpcID         string
-	SubnetID      string
-	KeyName       string
-	LaunchTime    time.Time
-	Platform      string // linux, windows
-	AMI           string
-	IAMRole       string
-	Tags          map[string]string
+	InstanceID     string
+	Name           string
+	State          string // running, stopped, pending, etc.
+	Type           string // t3.micro, etc.
+	AZ             string
+	PrivateIP      string
+	PublicIP       string
+	VpcID          string
+	SubnetID       string
+	KeyName        string
+	LaunchTime     time.Time
+	Platform       string // linux, windows
+	AMI            string
+	IAMRole        string
+	Tags           map[string]string
 	SecurityGroups []EC2SecurityGroupRef
 }
 
@@ -42,14 +42,14 @@ type EC2SecurityGroupRef struct {
 // EC2InstanceDetail holds extended instance information.
 type EC2InstanceDetail struct {
 	EC2Instance
-	Architecture   string
-	RootDeviceType string
-	RootDeviceName string
-	EBSOptimized   bool
-	Monitoring     string
-	Volumes        []EC2Volume
+	Architecture       string
+	RootDeviceType     string
+	RootDeviceName     string
+	EBSOptimized       bool
+	Monitoring         string
+	Volumes            []EC2Volume
 	SecurityGroupRules []EC2SGRule
-	ConsoleOutput  string
+	ConsoleOutput      string
 }
 
 // EC2Volume represents an attached EBS volume.

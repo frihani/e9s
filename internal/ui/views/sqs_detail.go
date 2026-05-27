@@ -68,8 +68,8 @@ func (m SQSDetailModel) SetStats(stats *aws.SQSQueueStats) SQSDetailModel {
 	return m
 }
 
-func (m SQSDetailModel) QueueName() string { return m.queueName }
-func (m SQSDetailModel) QueueURL() string  { return m.queueURL }
+func (m SQSDetailModel) QueueName() string         { return m.queueName }
+func (m SQSDetailModel) QueueURL() string          { return m.queueURL }
 func (m SQSDetailModel) Stats() *aws.SQSQueueStats { return m.stats }
 
 func (m SQSDetailModel) SetSize(w, h int) SQSDetailModel {

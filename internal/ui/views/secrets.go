@@ -13,15 +13,15 @@ import (
 )
 
 type SecretsModel struct {
-	secrets     []aws.Secret
-	nameFilter  string
-	cursor      int
-	filter      string
-	filtering   bool
-	filterInput textinput.Model
-	width       int
-	height      int
-	loaded      bool
+	secrets      []aws.Secret
+	nameFilter   string
+	cursor       int
+	filter       string
+	filtering    bool
+	filterInput  textinput.Model
+	width        int
+	height       int
+	loaded       bool
 	showAbsolute bool
 }
 

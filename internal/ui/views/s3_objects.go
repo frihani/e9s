@@ -15,16 +15,16 @@ import (
 )
 
 type S3ObjectsModel struct {
-	bucket      string
-	prefix      string // current "directory" prefix
-	objects     []aws.S3Object
-	cursor      int
-	filter      string
-	filtering   bool
-	filterInput textinput.Model
-	width       int
-	height      int
-	loaded      bool
+	bucket       string
+	prefix       string // current "directory" prefix
+	objects      []aws.S3Object
+	cursor       int
+	filter       string
+	filtering    bool
+	filterInput  textinput.Model
+	width        int
+	height       int
+	loaded       bool
 	showAbsolute bool
 }
 

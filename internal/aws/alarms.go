@@ -11,31 +11,31 @@ import (
 
 // CWAlarm represents a CloudWatch alarm summary for list views.
 type CWAlarm struct {
-	Name            string
-	State           string // OK, ALARM, INSUFFICIENT_DATA
-	StateReason     string
-	StateUpdatedAt  time.Time
-	MetricName      string
-	Namespace       string
-	ActionsEnabled  bool
-	AlarmARN        string
+	Name           string
+	State          string // OK, ALARM, INSUFFICIENT_DATA
+	StateReason    string
+	StateUpdatedAt time.Time
+	MetricName     string
+	Namespace      string
+	ActionsEnabled bool
+	AlarmARN       string
 }
 
 // CWAlarmDetail holds extended alarm information.
 type CWAlarmDetail struct {
 	CWAlarm
-	Description       string
-	ComparisonOp      string
-	Threshold         float64
-	EvalPeriods       int
-	Period            int
-	Statistic         string
-	TreatMissing      string
-	Dimensions        map[string]string
-	AlarmActions      []string
-	OKActions         []string
+	Description         string
+	ComparisonOp        string
+	Threshold           float64
+	EvalPeriods         int
+	Period              int
+	Statistic           string
+	TreatMissing        string
+	Dimensions          map[string]string
+	AlarmActions        []string
+	OKActions           []string
 	InsufficientActions []string
-	History           []CWAlarmHistoryItem
+	History             []CWAlarmHistoryItem
 }
 
 // CWAlarmHistoryItem represents one alarm history entry.
@@ -83,11 +83,11 @@ func (c *Client) DescribeCWAlarm(ctx context.Context, alarmName string) (*CWAlar
 
 	a := out.MetricAlarms[0]
 	detail := &CWAlarmDetail{
-		CWAlarm:     cwAlarmFromMetric(a),
-		Description: derefStrAws(a.AlarmDescription),
-		Threshold:   derefFloat64(a.Threshold),
-		EvalPeriods: int(derefInt32(a.EvaluationPeriods)),
-		Period:      int(derefInt32(a.Period)),
+		CWAlarm:      cwAlarmFromMetric(a),
+		Description:  derefStrAws(a.AlarmDescription),
+		Threshold:    derefFloat64(a.Threshold),
+		EvalPeriods:  int(derefInt32(a.EvaluationPeriods)),
+		Period:       int(derefInt32(a.Period)),
 		TreatMissing: derefStrAws(a.TreatMissingData),
 	}
 	if a.ComparisonOperator != "" {

@@ -144,8 +144,8 @@ func (m SQSQueuesModel) SelectedQueue() *aws.SQSQueue {
 	return &q
 }
 
-func (m SQSQueuesModel) SearchTerm() string  { return m.searchTerm }
-func (m SQSQueuesModel) IsFiltering() bool    { return m.filtering }
+func (m SQSQueuesModel) SearchTerm() string { return m.searchTerm }
+func (m SQSQueuesModel) IsFiltering() bool  { return m.filtering }
 
 func (m SQSQueuesModel) visibleRows() int {
 	overhead := 9

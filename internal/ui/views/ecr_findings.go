@@ -220,8 +220,8 @@ func (m ECRFindingsModel) SelectedFinding() *aws.ECRFinding {
 }
 
 func (m ECRFindingsModel) RepoName() string    { return m.repoName }
-func (m ECRFindingsModel) ImageDigest() string  { return m.imageDigest }
-func (m ECRFindingsModel) IsFiltering() bool    { return m.filtering }
+func (m ECRFindingsModel) ImageDigest() string { return m.imageDigest }
+func (m ECRFindingsModel) IsFiltering() bool   { return m.filtering }
 
 func (m ECRFindingsModel) visibleRows() int {
 	overhead := 10

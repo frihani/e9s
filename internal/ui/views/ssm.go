@@ -14,15 +14,15 @@ import (
 )
 
 type SSMModel struct {
-	params      []aws.Parameter
-	pathPrefix  string
-	cursor      int
-	filter      string
-	filtering   bool
-	filterInput textinput.Model
-	width       int
-	height      int
-	loaded      bool
+	params       []aws.Parameter
+	pathPrefix   string
+	cursor       int
+	filter       string
+	filtering    bool
+	filterInput  textinput.Model
+	width        int
+	height       int
+	loaded       bool
 	showAbsolute bool
 }
 

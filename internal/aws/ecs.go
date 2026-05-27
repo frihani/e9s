@@ -153,8 +153,8 @@ func (c *Client) ScaleService(ctx context.Context, cluster, service string, desi
 func (c *Client) ScaleInSuspended(ctx context.Context, cluster, service string) (bool, error) {
 	resourceID := fmt.Sprintf("service/%s/%s", cluster, service)
 	out, err := c.AppAutoScaling.DescribeScalableTargets(ctx, &applicationautoscaling.DescribeScalableTargetsInput{
-		ServiceNamespace: aastypes.ServiceNamespaceEcs,
-		ResourceIds:      []string{resourceID},
+		ServiceNamespace:  aastypes.ServiceNamespaceEcs,
+		ResourceIds:       []string{resourceID},
 		ScalableDimension: aastypes.ScalableDimensionECSServiceDesiredCount,
 	})
 	if err != nil {

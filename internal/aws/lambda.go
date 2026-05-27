@@ -72,13 +72,13 @@ func transformLambdaFunction(f lambdaTypes.FunctionConfiguration) LambdaFunction
 
 func transformLambdaConfig(f lambdaTypes.FunctionConfiguration) LambdaFunction {
 	fn := LambdaFunction{
-		Name:     derefStrAws(f.FunctionName),
-		ARN:      derefStrAws(f.FunctionArn),
-		Runtime:  string(f.Runtime),
-		Handler:  derefStrAws(f.Handler),
+		Name:        derefStrAws(f.FunctionName),
+		ARN:         derefStrAws(f.FunctionArn),
+		Runtime:     string(f.Runtime),
+		Handler:     derefStrAws(f.Handler),
 		Description: derefStrAws(f.Description),
-		CodeSize: f.CodeSize,
-		State:    string(f.State),
+		CodeSize:    f.CodeSize,
+		State:       string(f.State),
 	}
 	if f.MemorySize != nil {
 		fn.MemoryMB = int(*f.MemorySize)

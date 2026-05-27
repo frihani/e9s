@@ -126,4 +126,3 @@ func alarmStateStyle(state string) lipgloss.Style {
 		return lipgloss.NewStyle().Foreground(theme.ColorYellow)
 	}
 }
-

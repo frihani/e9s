@@ -142,10 +142,10 @@ func (a App) refreshAlarms() tea.Cmd {
 
 func (a App) handleCWAlarmStatePick(value string) (App, tea.Cmd) {
 	stateMap := map[string]string{
-		"All alarms":              "",
-		"ALARM only":              "ALARM",
-		"OK only":                 "OK",
-		"INSUFFICIENT_DATA only":  "INSUFFICIENT_DATA",
+		"All alarms":             "",
+		"ALARM only":             "ALARM",
+		"OK only":                "OK",
+		"INSUFFICIENT_DATA only": "INSUFFICIENT_DATA",
 	}
 	state := stateMap[value]
 	return a.openCWAlarms(state)
@@ -154,4 +154,3 @@ func (a App) handleCWAlarmStatePick(value string) (App, tea.Cmd) {
 func (a App) handleSetAlarmStatePick(value string) (App, tea.Cmd) {
 	return a.doSetAlarmState(value)
 }
-

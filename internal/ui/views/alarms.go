@@ -15,16 +15,16 @@ import (
 )
 
 type AlarmsModel struct {
-	alarms      []aws.CWAlarm
-	stateFilter string
-	cursor      int
-	filter      string
-	filtering   bool
-	filterInput textinput.Model
+	alarms       []aws.CWAlarm
+	stateFilter  string
+	cursor       int
+	filter       string
+	filtering    bool
+	filterInput  textinput.Model
 	showAbsolute bool
-	width       int
-	height      int
-	loaded      bool
+	width        int
+	height       int
+	loaded       bool
 }
 
 func NewAlarms(stateFilter string) AlarmsModel {
@@ -186,8 +186,8 @@ func (m AlarmsModel) SelectedAlarm() *aws.CWAlarm {
 	return &a
 }
 
-func (m AlarmsModel) IsFiltering() bool    { return m.filtering }
-func (m AlarmsModel) StateFilter() string  { return m.stateFilter }
+func (m AlarmsModel) IsFiltering() bool   { return m.filtering }
+func (m AlarmsModel) StateFilter() string { return m.stateFilter }
 
 func (m AlarmsModel) visibleRows() int {
 	overhead := 9

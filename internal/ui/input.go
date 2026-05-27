@@ -49,10 +49,10 @@ const (
 )
 
 type InputModel struct {
-	Active  bool
-	Action  InputAction
-	Label   string
-	input   textinput.Model
+	Active bool
+	Action InputAction
+	Label  string
+	input  textinput.Model
 }
 
 type InputResultMsg struct {

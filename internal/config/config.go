@@ -71,9 +71,9 @@ type Config struct {
 		Region          string `yaml:"region"`
 		Profile         string `yaml:"profile"`
 		RefreshInterval int    `yaml:"refresh_interval"`
-		IdleTimeout     int    `yaml:"idle_timeout"`      // seconds of inactivity before pausing refresh (0 = never, default 300)
-		DefaultMode     string `yaml:"default_mode"`      // ECS, CW, SSM, SM, S3, Lambda, DynamoDB, or "" for picker
-		SaveDirectory   string `yaml:"save_directory"`    // default directory for file save dialogs
+		IdleTimeout     int    `yaml:"idle_timeout"`   // seconds of inactivity before pausing refresh (0 = never, default 300)
+		DefaultMode     string `yaml:"default_mode"`   // ECS, CW, SSM, SM, S3, Lambda, DynamoDB, or "" for picker
+		SaveDirectory   string `yaml:"save_directory"` // default directory for file save dialogs
 	} `yaml:"defaults"`
 	Display struct {
 		TimestampFormat string `yaml:"timestamp_format"` // "relative" or "absolute"
@@ -81,33 +81,33 @@ type Config struct {
 		MaxLogLines     int    `yaml:"max_log_lines"`
 	} `yaml:"display"`
 	Modules struct {
-		ECS             *bool `yaml:"ecs"`
-		CloudWatch      *bool `yaml:"cloudwatch"`       // legacy: maps to CWLogs
-		CWLogs          *bool `yaml:"cloudwatch_logs"`
-		CWAlarms        *bool `yaml:"cloudwatch_alarms"`
-		SSM             *bool `yaml:"ssm"`
-		SM              *bool `yaml:"sm"`
-		S3              *bool `yaml:"s3"`
-		Lambda          *bool `yaml:"lambda"`
-		DynamoDB        *bool `yaml:"dynamodb"`
-		SQS             *bool `yaml:"sqs"`
-		CodeBuild       *bool `yaml:"codebuild"`
-		EC2             *bool `yaml:"ec2_instances"`
-		ECR             *bool `yaml:"ecr"`
-		Route53         *bool `yaml:"route53"`
-		Tofu            *bool `yaml:"tofu"`
+		ECS        *bool `yaml:"ecs"`
+		CloudWatch *bool `yaml:"cloudwatch"` // legacy: maps to CWLogs
+		CWLogs     *bool `yaml:"cloudwatch_logs"`
+		CWAlarms   *bool `yaml:"cloudwatch_alarms"`
+		SSM        *bool `yaml:"ssm"`
+		SM         *bool `yaml:"sm"`
+		S3         *bool `yaml:"s3"`
+		Lambda     *bool `yaml:"lambda"`
+		DynamoDB   *bool `yaml:"dynamodb"`
+		SQS        *bool `yaml:"sqs"`
+		CodeBuild  *bool `yaml:"codebuild"`
+		EC2        *bool `yaml:"ec2_instances"`
+		ECR        *bool `yaml:"ecr"`
+		Route53    *bool `yaml:"route53"`
+		Tofu       *bool `yaml:"tofu"`
 	} `yaml:"modules"`
-	KeyBindings map[string]string `yaml:"keybindings"` // action → key override
-	ExcludeServices []string `yaml:"exclude_services"`
-	SSMPrefixes     []SSMPrefix    `yaml:"ssm_prefixes"`
-	SMFilters       []SMFilter     `yaml:"sm_filters"`
-	S3Searches      []S3Search     `yaml:"s3_searches"`
-	LambdaSearches  []LambdaSearch `yaml:"lambda_searches"`
-	DynamoTables    []DynamoTable  `yaml:"dynamo_tables"`
-	DynamoQueries   []DynamoQuery  `yaml:"dynamo_queries"`
-	SQSQueues       []SQSQueueEntry `yaml:"sqs_queues"`
-	LogPaths        []LogPathEntry `yaml:"log_paths"`
-	TofuDirs        []TofuDirEntry `yaml:"tofu_dirs"`
+	KeyBindings     map[string]string `yaml:"keybindings"` // action → key override
+	ExcludeServices []string          `yaml:"exclude_services"`
+	SSMPrefixes     []SSMPrefix       `yaml:"ssm_prefixes"`
+	SMFilters       []SMFilter        `yaml:"sm_filters"`
+	S3Searches      []S3Search        `yaml:"s3_searches"`
+	LambdaSearches  []LambdaSearch    `yaml:"lambda_searches"`
+	DynamoTables    []DynamoTable     `yaml:"dynamo_tables"`
+	DynamoQueries   []DynamoQuery     `yaml:"dynamo_queries"`
+	SQSQueues       []SQSQueueEntry   `yaml:"sqs_queues"`
+	LogPaths        []LogPathEntry    `yaml:"log_paths"`
+	TofuDirs        []TofuDirEntry    `yaml:"tofu_dirs"`
 }
 
 // DefaultConfig returns a Config with sensible defaults.
@@ -312,16 +312,16 @@ func boolDefault(b *bool, def bool) bool {
 	return *b
 }
 
-func (c *Config) ModuleS3() bool          { return boolDefault(c.Modules.S3, true) }
-func (c *Config) ModuleLambda() bool      { return boolDefault(c.Modules.Lambda, true) }
-func (c *Config) ModuleDynamoDB() bool    { return boolDefault(c.Modules.DynamoDB, true) }
-func (c *Config) ModuleSQS() bool         { return boolDefault(c.Modules.SQS, true) }
-func (c *Config) ModuleCodeBuild() bool   { return boolDefault(c.Modules.CodeBuild, true) }
-func (c *Config) ModuleEC2() bool         { return boolDefault(c.Modules.EC2, true) }
-func (c *Config) ModuleECR() bool         { return boolDefault(c.Modules.ECR, true) }
-func (c *Config) ModuleRoute53() bool     { return boolDefault(c.Modules.Route53, true) }
-func (c *Config) ModuleTofu() bool        { return boolDefault(c.Modules.Tofu, true) }
-func (c *Config) ModuleECS() bool        { return boolDefault(c.Modules.ECS, true) }
+func (c *Config) ModuleS3() bool        { return boolDefault(c.Modules.S3, true) }
+func (c *Config) ModuleLambda() bool    { return boolDefault(c.Modules.Lambda, true) }
+func (c *Config) ModuleDynamoDB() bool  { return boolDefault(c.Modules.DynamoDB, true) }
+func (c *Config) ModuleSQS() bool       { return boolDefault(c.Modules.SQS, true) }
+func (c *Config) ModuleCodeBuild() bool { return boolDefault(c.Modules.CodeBuild, true) }
+func (c *Config) ModuleEC2() bool       { return boolDefault(c.Modules.EC2, true) }
+func (c *Config) ModuleECR() bool       { return boolDefault(c.Modules.ECR, true) }
+func (c *Config) ModuleRoute53() bool   { return boolDefault(c.Modules.Route53, true) }
+func (c *Config) ModuleTofu() bool      { return boolDefault(c.Modules.Tofu, true) }
+func (c *Config) ModuleECS() bool       { return boolDefault(c.Modules.ECS, true) }
 func (c *Config) ModuleCWLogs() bool {
 	if c.Modules.CWLogs != nil {
 		return *c.Modules.CWLogs
@@ -329,8 +329,8 @@ func (c *Config) ModuleCWLogs() bool {
 	return boolDefault(c.Modules.CloudWatch, true) // legacy fallback
 }
 func (c *Config) ModuleCWAlarms() bool { return boolDefault(c.Modules.CWAlarms, true) }
-func (c *Config) ModuleSSM() bool         { return boolDefault(c.Modules.SSM, true) }
-func (c *Config) ModuleSM() bool          { return boolDefault(c.Modules.SM, true) }
+func (c *Config) ModuleSSM() bool      { return boolDefault(c.Modules.SSM, true) }
+func (c *Config) ModuleSM() bool       { return boolDefault(c.Modules.SM, true) }
 
 // AddSMFilter adds or updates a saved Secrets Manager filter.
 func (c *Config) AddSMFilter(name, filter string) bool {
